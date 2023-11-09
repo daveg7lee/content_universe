@@ -5,27 +5,26 @@ class InterestButton extends StatefulWidget {
   const InterestButton({
     super.key,
     required this.interest,
+    required this.isSelected,
+    required this.onTap,
   });
 
   final String interest;
+  final bool isSelected;
+  final Function(bool) onTap;
 
   @override
-  State<InterestButton> createState() => _InterestButtonState();
+  // ignore: library_private_types_in_public_api
+  _InterestButtonState createState() => _InterestButtonState();
 }
 
 class _InterestButtonState extends State<InterestButton> {
-  bool _isSelected = false;
-
-  void onTap() {
-    setState(() {
-      _isSelected = !_isSelected;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        widget.onTap(!widget.isSelected);
+      },
       child: AnimatedContainer(
         duration: const Duration(microseconds: 300),
         padding: const EdgeInsets.symmetric(
@@ -33,7 +32,8 @@ class _InterestButtonState extends State<InterestButton> {
           horizontal: Sizes.size20,
         ),
         decoration: BoxDecoration(
-          color: _isSelected ? Theme.of(context).primaryColor : Colors.white,
+          color:
+              widget.isSelected ? Theme.of(context).primaryColor : Colors.white,
           borderRadius: BorderRadius.circular(
             Sizes.size32,
           ),
@@ -51,8 +51,9 @@ class _InterestButtonState extends State<InterestButton> {
         child: Text(
           widget.interest,
           style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: _isSelected ? Colors.white : Colors.black),
+            fontWeight: FontWeight.bold,
+            color: widget.isSelected ? Colors.white : Colors.black,
+          ),
         ),
       ),
     );

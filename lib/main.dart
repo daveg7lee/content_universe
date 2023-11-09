@@ -1,5 +1,5 @@
 import 'package:content_universe/constants/sizes.dart';
-import 'package:content_universe/main/tutorial_screen.dart';
+import 'package:content_universe/get_start/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,20 +13,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Universe Contents',
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          foregroundColor: Colors.black,
-          backgroundColor: Colors.white,
-          elevation: 0,
-          titleTextStyle: TextStyle(
-            color: Colors.black,
-            fontSize: Sizes.size20,
-            fontWeight: FontWeight.w600,
+        title: 'Universe Contents',
+        theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+            foregroundColor: Colors.black,
+            backgroundColor: Colors.white,
+            elevation: 0,
+            titleTextStyle: TextStyle(
+              color: Colors.black,
+              fontSize: Sizes.size20,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
-      ),
-      home: const TutorialScreen(),
-    );
+        home: const WelcomeScreen());
   }
 }
