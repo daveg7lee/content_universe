@@ -1,5 +1,5 @@
 import 'package:content_universe/constants/sizes.dart';
-import 'package:content_universe/get_start/citizen_check.dart';
+import 'package:content_universe/get_start/welcome.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const CitizenCheckScreen(),
+      home: const WelcomeScreen(),
     );
   }
 }
