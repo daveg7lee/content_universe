@@ -1,7 +1,7 @@
 import 'package:content_universe/constants/gaps.dart';
 import 'package:content_universe/constants/sizes.dart';
 import 'package:content_universe/get_start/interest_button.dart';
-import 'package:content_universe/main/homepage.dart';
+import 'package:content_universe/main/tutorial_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +33,7 @@ class _InterestScreenState extends State<InterestScreen> {
   void _onPress() {
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const HomepageScreen()),
+        MaterialPageRoute(builder: (context) => const TutorialScreen()),
         (route) => false);
   }
 

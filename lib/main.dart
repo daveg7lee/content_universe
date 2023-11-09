@@ -1,5 +1,5 @@
 import 'package:content_universe/constants/sizes.dart';
-import 'package:content_universe/get_start/welcome.dart';
+import 'package:content_universe/main/tutorial_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const WelcomeScreen(),
+      home: const TutorialScreen(),
     );
   }
 }
