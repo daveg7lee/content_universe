@@ -1,6 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:content_universe/constants/sizes.dart';
-import 'package:content_universe/get_start/interest_screen.dart';
+import 'package:content_universe/get_start/interests/interest_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

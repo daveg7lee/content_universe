@@ -1,7 +1,7 @@
 import 'package:content_universe/constants/gaps.dart';
 import 'package:content_universe/constants/sizes.dart';
-import 'package:content_universe/get_start/interest_button.dart';
-import 'package:content_universe/main/plan_screen.dart';
+import 'package:content_universe/get_start/interests/interest_button.dart';
+import 'package:content_universe/get_start/suggested_tour_spot_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
