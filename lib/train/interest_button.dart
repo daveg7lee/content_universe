@@ -1,3 +1,4 @@
+import 'package:content_universe/train/start_point_specific.dart';
 import 'package:flutter/material.dart';
 import 'package:content_universe/constants/sizes.dart';
 
@@ -23,7 +24,11 @@ class _InterestButtonState extends State<InterestButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.onTap(!widget.isSelected);
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const StartSpecificScreen(),
+          ),
+        );
       },
       child: AnimatedContainer(
         duration: const Duration(microseconds: 300),
