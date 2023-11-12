@@ -1,5 +1,5 @@
 import 'package:content_universe/constants/sizes.dart';
-import 'package:content_universe/get_start/welcome_screen.dart';
+import 'package:content_universe/train/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

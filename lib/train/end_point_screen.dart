@@ -1,12 +1,9 @@
 import 'package:content_universe/constants/gaps.dart';
 import 'package:content_universe/constants/sizes.dart';
-import 'package:content_universe/get_start/interest_button.dart';
-import 'package:content_universe/main/plan_screen.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:content_universe/train/end_point_specific_screen.dart';
 import 'package:flutter/material.dart';
 
 const interests = [
-  "Seoul",
   "Busan",
   "Incheon",
   "Daegu",
@@ -109,55 +106,21 @@ const interests = [
   "Pyongchang",
 ];
 
-class InterestScreen extends StatefulWidget {
-  const InterestScreen({
+class EndPointScreen extends StatefulWidget {
+  const EndPointScreen({
     super.key,
   });
 
   @override
-  State<InterestScreen> createState() => _InterestScreenState();
+  State<EndPointScreen> createState() => _EndPointScreenState();
 }
 
-class _InterestScreenState extends State<InterestScreen> {
+class _EndPointScreenState extends State<EndPointScreen> {
   final ScrollController _scrollController = ScrollController();
   bool _showTitle = false;
   final TextEditingController _searchController = TextEditingController();
   List<String> filteredInterests = List.from(interests);
   List<String> selectedInterests = [];
-
-  void _onPress() {
-    if (selectedInterests.isNotEmpty) {
-      List<TravelPlan> selectedTracks = [];
-
-      // Create TravelPlan objects for each selected interest
-      for (int i = 0; i < selectedInterests.length; i++) {
-        selectedTracks.add(
-          TravelPlan(
-            route: selectedInterests[i],
-            time: "2 hours", // Set your desired time
-            price: 55.0, // Set your desired price
-          ),
-        );
-      }
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => TravelPlanScreen(
-            selectedTracks: selectedTracks,
-          ),
-        ),
-      );
-    } else {
-      // Show an error message or prevent navigation
-      // For example, you can display a snackbar with an error message:
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please select at least one interest.'),
-        ),
-      );
-    }
-  }
 
   void _onScroll() {
     if (_scrollController.offset > 100) {
@@ -194,8 +157,11 @@ class _InterestScreenState extends State<InterestScreen> {
   void onSearchTextChanged(String query) {
     setState(() {
       filteredInterests = interests
-          .where((interest) =>
-              interest.toLowerCase().contains(query.toLowerCase()))
+          .where(
+            (interest) => interest.toLowerCase().contains(
+                  query.toLowerCase(),
+                ),
+          )
           .toList();
     });
   }
@@ -210,7 +176,7 @@ class _InterestScreenState extends State<InterestScreen> {
           title: AnimatedOpacity(
             duration: const Duration(microseconds: 300),
             opacity: _showTitle ? 1 : 0,
-            child: const Text("Choose Your Interest"),
+            child: const Text("Choose Your Destination"),
           ),
         ),
         body: Scrollbar(
@@ -228,18 +194,10 @@ class _InterestScreenState extends State<InterestScreen> {
                 children: [
                   Gaps.v32,
                   const Text(
-                    "Choose Your Interest",
+                    "Selected Your Destination",
                     style: TextStyle(
-                      fontSize: Sizes.size40,
+                      fontSize: Sizes.size32,
                       fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Gaps.v20,
-                  const Text(
-                    "Get better travel recommendations",
-                    style: TextStyle(
-                      fontSize: Sizes.size20,
-                      fontWeight: FontWeight.w400,
                     ),
                   ),
                   Gaps.v20,
@@ -247,53 +205,65 @@ class _InterestScreenState extends State<InterestScreen> {
                     controller: _searchController,
                     onChanged: onSearchTextChanged,
                     decoration: const InputDecoration(
-                      labelText: 'Search Interests',
+                      labelText: 'Search',
                       prefixIcon: Icon(Icons.search),
                     ),
                   ),
                   Gaps.v20,
-                  Wrap(
-                    runSpacing: 15,
-                    spacing: 15,
+                  ListView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.all(15), // Optional padding
                     children: [
                       for (var interest in filteredInterests)
-                        InterestButton(
-                          interest: interest,
-                          isSelected: selectedInterests.contains(interest),
-                          onTap: (isSelected) {
-                            if (isSelected) {
-                              selectedInterests.add(interest);
-                            } else {
-                              selectedInterests.remove(interest);
-                            }
-                            setState(() {}); // Trigger a rebuild
-                          },
-                        )
+                        Container(
+                          margin: const EdgeInsets.only(
+                              bottom:
+                                  15), // Adjust the margin to control spacing
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const EndSpecificScreen(),
+                                ),
+                              );
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(microseconds: 300),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: Sizes.size14,
+                                horizontal: Sizes.size20,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(
+                                  Sizes.size32,
+                                ),
+                                border: Border.all(
+                                  color: Colors.black.withOpacity(0.05),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.05),
+                                    blurRadius: 5,
+                                    spreadRadius: 5,
+                                  ),
+                                ],
+                              ),
+                              child: Text(
+                                interest,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                     ],
-                  )
+                  ),
                 ],
-              ),
-            ),
-          ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          elevation: 2,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              bottom: Sizes.size24,
-              top: Sizes.size16,
-              left: Sizes.size24,
-              right: Sizes.size24,
-            ),
-            child: CupertinoButton(
-              onPressed: _onPress,
-              color: Theme.of(context).primaryColor,
-              child: const Text(
-                "Next",
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: Sizes.size20,
-                ),
               ),
             ),
           ),

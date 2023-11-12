@@ -1,6 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:content_universe/constants/sizes.dart';
-import 'package:content_universe/get_start/interest_screen.dart';
+import 'package:content_universe/train/start_point.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void _onPressed() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const InterestScreen(),
+        builder: (context) => const StartPointScreen(),
       ),
     );
   }
@@ -38,6 +38,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     color: Colors.black,
                   ),
                   child: AnimatedTextKit(
+                    repeatForever: true,
                     animatedTexts: [
                       TypewriterAnimatedText(
                         'Find Your Path Right Now',
