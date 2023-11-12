@@ -13,19 +13,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Universe Contents',
-        theme: ThemeData(
-          appBarTheme: const AppBarTheme(
-            foregroundColor: Colors.black,
-            backgroundColor: Colors.white,
-            elevation: 0,
-            titleTextStyle: TextStyle(
-              color: Colors.black,
-              fontSize: Sizes.size20,
-              fontWeight: FontWeight.w600,
-            ),
+      title: 'Universe Contents',
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          foregroundColor: Colors.black,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: Sizes.size20,
+            fontWeight: FontWeight.w600,
           ),
         ),
-        home: const WelcomeScreen());
+      ),
+      home: const WelcomeScreen(),
+    );
   }
 }
